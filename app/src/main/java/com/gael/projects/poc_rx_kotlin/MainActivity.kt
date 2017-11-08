@@ -11,6 +11,7 @@ import io.reactivex.Observer
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Predicate
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import org.reactivestreams.Subscriber
@@ -75,6 +76,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                 .subscribeOn(Schedulers.newThread())
                 //execution subscriber
                 .observeOn(AndroidSchedulers.mainThread())
+                .takeUntil(object : Predicate<Long> {
+                    override fun test(t: Long): Boolean {
+                        return t > 100
+                    }
+
+                })
                 .subscribe(object : Observer<Long> {
                     override fun onError(e: Throwable?) {
                         Log.i("Test","on error ".plus(e!!.message))
@@ -94,5 +101,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                     }
 
                 })
+
     }
 }
