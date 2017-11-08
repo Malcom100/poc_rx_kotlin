@@ -26,3 +26,8 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    versionRxAndroid = '2.0.1'
+    versionRxJava = '2.0.8'
+}
