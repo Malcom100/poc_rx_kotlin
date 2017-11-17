@@ -126,19 +126,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <TextView
+            <ImageView
                 android:id="@+id/test_circle"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/test_circle_view"/>
+                android:background="@drawable/animation_gradient_color_red"/>
 
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/test_circle_2"
+                    android:layout_marginLeft="24dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/animation_gradient_color_red"/>
                 <TextView
                     android:id="@+id/percent_progress"
-                    android:layout_marginTop="25dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

@@ -8,10 +8,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.AnimationDrawable
-import android.graphics.drawable.GradientDrawable
 import android.hardware.fingerprint.FingerprintManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Vibrator
 import android.security.keystore.KeyGenParameterSpec
@@ -24,6 +24,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.gael.projects.poc_rx_kotlin.chatbot.ChatbotContract
@@ -50,6 +51,7 @@ import java.io.InputStream
 import java.lang.RuntimeException
 import java.security.*
 import java.security.cert.CertificateException
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.crypto.*
 
@@ -72,6 +74,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IFile {
     private lateinit var presenterChatBot : ChatbotContract.Presenter
     private lateinit var inputStream : InputStream
     private var nameFile : String = ""
+
+    private var startAnim : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -140,8 +144,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IFile {
 
             R.id.button_anim_move -> {
 
+                startAnim = true
+
                 //animation color
-                var animationDrawable : GradientDrawable = test_circle.background as GradientDrawable
+                var animationDrawable : AnimationDrawable = test_circle.background as AnimationDrawable
                 animationDrawable.start()
 
                 //text view
@@ -149,39 +155,49 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IFile {
                 var animtopOut : Animation = AnimationUtils.loadAnimation(this, R.anim.animation_move)
                 text_anim_move.animation = animtopOut
 
-                //progress bar
-                var progress : ProgressBar = circularProgressbar
-                //start
-                progress.progress = 0
-                //end
-                progress.secondaryProgress = 100
-                progress.max = 100
-                progress.progressDrawable = resources.getDrawable(R.drawable.custom_progress_bar)
-                var pStatus = 0
-
-                Thread(Runnable {
-                    kotlin.run {
-                        while(pStatus < 100) {
-                            pStatus += 1
-
-                            //set the progress
-                            handlerProgress.post(Runnable {
-                                percent_progress.text = pStatus.toString().plus(" %")
-                                progress.progress = pStatus
-                            })
-                            //each second
-                            try{
-                                Thread.sleep(1000)
-                            }catch (e : Exception) {
-                                e.printStackTrace()
-                            }
-                        }
-                    }
-                }).start()
+                var animationDrawable2 : AnimationDrawable = test_circle_2.background as AnimationDrawable
+                animationDrawable2.start()
+                try{
+                    Thread.sleep(3000)
+                }catch (e : Exception) {
+                    e.printStackTrace()
+                }
+                startAnimationGradientProgress(animationDrawable2)
             }
         }
     }
 
+
+
+    fun startAnimationGradientProgress(animation : AnimationDrawable) {
+        //progress bar
+        var progress : ProgressBar = circularProgressbar
+        synchronized(progress) {
+            if(startAnim) {
+                startAnim = false
+                //start
+                progress.progress = 0
+                //end
+                progress.secondaryProgress = 100
+                progress.max = 10
+                progress.progressDrawable = resources.getDrawable(R.drawable.custom_progress_bar)
+                var pStatus = 0
+
+                object : CountDownTimer(11000, 1000) {
+
+                    override fun onTick(millisUntilFinished: Long) {
+                        pStatus += 1
+                        percent_progress.text = pStatus.toString().plus(" %")
+                        progress.progress = pStatus
+                    }
+
+                    override fun onFinish() {
+                            animation!!.stop()
+                    }
+                }.start()
+            }
+        }
+    }
 
     private fun gotoChatBot(chatbot : ChatBot) {
         manageLayouts()
