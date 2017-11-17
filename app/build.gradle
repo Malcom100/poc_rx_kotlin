@@ -10,11 +10,13 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.gael.projects.poc_rx_kotlin"
-        minSdkVersion 14
+        minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -58,6 +60,12 @@ dependencies {
     //rx java 2
     compile "io.reactivex.rxjava2:rxandroid:$versionRxAndroid"
     compile "io.reactivex.rxjava2:rxjava:$versionRxJava"
+
+    //recyclerview
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+
+    //android sqlite asset helper
+    compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
 }
 repositories {
     mavenCentral()

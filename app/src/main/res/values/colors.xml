@@ -3,4 +3,22 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorRed">#F44336</color>
+
+    <!-- Anim color -->
+    <color name="colorRed_1_start">#FFCDD2</color>
+    <color name="colorRed_1_final">#EF9A9A</color>
+
+    <color name="colorRed_2_start">#E57373</color>
+    <color name="colorRed_2_final">#EF5350</color>
+
+    <color name="colorRed_3_start">#F44336</color>
+    <color name="colorRed_3_final">#E53935</color>
+
+    <color name="colorRed_4_start">#D32F2F</color>
+    <color name="colorRed_4_final">#B71C1C</color>
+
+    <color name="colorRed_start">#EF5350</color>
+    <color name="colorRed_final">#B71C1C</color>
 </resources>

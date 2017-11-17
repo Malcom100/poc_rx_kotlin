@@ -3,4 +3,19 @@
 
     <string name="btn_create_observable">simple observable</string>
     <string name="btn_interval_observable">simple interval</string>
+    <string name="btn_fingerprint">fingerprint</string>
+    <string name="btn_chatbot">chatbot</string>
+    <string name="btn_file">File</string>
+    <string name="btn_anim_move">Animation move</string>
+    <string name="text_view_fingerprint_message">Put your finger on the sensor and lift after you feel a vibration</string>
+
+    <string name="error_lock_screen_disable"> Lock screen security not enabled in Settings </string>
+    <string name="message_fingerprint_permission"> Fingerprint authentication permission not enabled </string>
+    <string name="message_fingerprint_not_saved"> Register at least one fingerprint in Settings </string>
+
+    <string name="message_fingerprint_succeed"> Succes </string>
+
+    <string name="chat_bot_text_response">Your choice :</string>
+
+    <string name="text_anim_move">On the way to work !!</string>
 </resources>

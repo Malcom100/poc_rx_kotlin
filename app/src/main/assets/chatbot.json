@@ -1,0 +1,16 @@
+{
+  "presentation" : {
+    "hello" : "Hello !",
+    "name" :" My name is chatter ",
+    "help" : "I can help you for your choice "
+  },
+  "choice" : [
+    {"choice": "sport"
+    },
+    {"choice": "party"
+    },
+    {
+      "choice": "drink"
+    }
+    ]
+}
